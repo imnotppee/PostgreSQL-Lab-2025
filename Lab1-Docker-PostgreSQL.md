@@ -80,7 +80,7 @@ docker run hello-world
 
 **บันทึกผลการทดลอง - การเตรียมความพร้อม:**
 ```
-ใส่ Screenshot ของผลการรัน docker --version และ docker run hello-world ที่นี่
+![alt text](image.png)
 ```
 
 ## ขั้นตอนการทดลอง
@@ -104,7 +104,7 @@ docker inspect postgres
 
 **บันทึกผลการทดลอง - Step 1:**
 ```
-ใส่ Screenshot ของผลการรัน docker images ที่นี่
+![alt text](image-1.png)
 ```
 
 ### Step 2: Create Docker Volume for Data Persistence
@@ -127,7 +127,7 @@ docker volume create postgres-config
 
 **บันทึกผลการทดลอง - Step 2:**
 ```
-ใส่ Screenshot ของผลการรัน docker volume ls และ docker volume inspect postgres-data ที่นี่
+![alt text](image-2.png)
 ```
 
 ### Step 3: Create PostgreSQL Container with Volume
@@ -161,7 +161,7 @@ docker run --name postgres-lab \
 
 **บันทึกผลการทดลอง - Step 3:**
 ```
-ใส่ Screenshot ของผลการรัน docker run ที่นี่
+![alt text](image-3.png)
 ```
 
 ### Step 4: Verify Container Status and Resource Usage
@@ -182,10 +182,9 @@ docker volume inspect postgres-data
 
 **บันทึกผลการทดลอง - Step 4:**
 ```
-ใส่ Screenshot ของ:
-1. ผลการรัน docker ps
-2. ส่วนหนึ่งของ docker logs postgres-lab
-3. ผลการรัน docker stats
+![alt text](image-4.png)
+![alt text](image-5.png)
+![alt text](image-6.png)
 ```
 
 ### Step 5: Connect to PostgreSQL และตรวจสอบ Configuration
@@ -227,10 +226,9 @@ WHERE name IN ('shared_buffers', 'work_mem', 'maintenance_work_mem', 'effective_
 
 **บันทึกผลการทดลอง - Step 5:**
 ```
-ใส่ Screenshot ของ:
-1. ผลการรัน SELECT version();
-2. ผลการรัน SHOW shared_buffers; SHOW work_mem; SHOW maintenance_work_mem;SHOW effective_cache_size;
-3. ผลการรัน \l และ \du
+![alt text](image-7.png)
+![alt text](image-8.png)
+![alt text](image-9.png)
 ```
 
 ### Step 6: Database Management Operations
