@@ -655,7 +655,7 @@ docker volume inspect postgres-data
 
 **บันทึกผล Checkpoint 1:**
 ```
-ใส่ Screenshot ของ resource usage และ volume information ที่นี่
+![alt text](image-41.png)
 ```
 
 ### Checkpoint 2: Database Performance และ Configuration
@@ -703,10 +703,9 @@ WHERE state = 'active';
 
 **บันทึกผล Checkpoint 2:**
 ```
-ใส่ Screenshot ของ:
-1. Database statistics
-2. Memory configuration
-3. Active connections
+![alt text](image-42.png)
+![alt text](image-43.png)
+![alt text](image-44.png)
 ```
 
 ## การแก้ไขปัญหาเบื้องต้น
@@ -762,16 +761,16 @@ docker volume create postgres-data
 - Volume: `multi-postgres-data`
 
 ```bash
-# พื้นที่สำหรับคำตอบ - เขียน command ที่ใช้
+docker run --name multi-postgres -e POSTGRES_PASSWORD=multipass123 -v multi-postgres-data:/var/lib/postgresql/data
+ -p 5434:5432 --memory="1.5g" --cpus="1.5" -d postgres
 
 ```
 
 **ผลการทำแบบฝึกหัด 1:**
 ```
-ใส่ Screenshot ของ:
-1. คำสั่งที่ใช้สร้าง container
-2. docker ps แสดง container ใหม่
-3. docker stats แสดงการใช้ resources
+![alt text](image-45.png)
+![alt text](image-46.png)
+![alt text](image-47.png)
 ```
 
 ### แบบฝึกหัด 2: User Management และ Security
@@ -788,16 +787,33 @@ docker volume create postgres-data
    - `admin_user` (รหัสผ่าน: `admin123`) - เป็นสมาชิกของ db_admins
 
 ```sql
--- พื้นที่สำหรับคำตอบ - เขียน SQL commands ที่ใช้
+docker exec -it multi-postgres psql -U postgres
+
+CREATE ROLE app_developers;
+CREATE ROLE data_analysts;
+CREATE ROLE db_admins;
+
+CREATE USER dev_user WITH PASSWORD 'dev123';
+GRANT app_developers TO dev_user;
+
+CREATE USER analyst_user WITH PASSWORD 'analyst123';
+GRANT data_analysts TO analyst_user;
+
+CREATE USER admin_user WITH PASSWORD 'admin123';
+GRANT db_admins TO admin_user;
+
 
 ```
 
 **ผลการทำแบบฝึกหัด 2:**
 ```
 ใส่ Screenshot ของ:
-1. การสร้าง roles และ users
-2. ผลการรัน \du แสดงผู้ใช้ทั้งหมด
-3. ผลการทดสอบเชื่อมต่อด้วย user ต่างๆ
+![alt text](image-48.png)
+![alt text](image-49.png)
+![alt text](image-50.png)
+![alt text](image-51.png)
+![alt text](image-52.png)
+![alt text](image-53.png)
 ```
 
 ### แบบฝึกหัด 3: Schema Design และ Complex Queries
@@ -944,22 +960,70 @@ docker volume create postgres-data
 ```
 ```
    สร้าง queries เพื่อหาคำตอบ:
-   - หาสินค้าที่ขายดีที่สุด 5 อันดับ
-   - หายอดขายรวมของแต่ละหมวดหมู่
-   - หาลูกค้าที่ซื้อสินค้ามากที่สุด
+   ![alt text](image-54.png)
+   ![alt text](image-55.png)
+   ![alt text](image-56.png)
 ```
 ```sql
-  -- พื้นที่สำหรับคำตอบ - เขียน SQL commands ทั้งหมด
+CREATE SCHEMA ecommerce;
+CREATE SCHEMA analytics;
+CREATE SCHEMA audit;
+
+CREATE TABLE ecommerce.categories (
+    category_id SERIAL PRIMARY KEY,
+    name TEXT NOT NULL,
+    description TEXT
+);
+
+CREATE TABLE ecommerce.products (
+    product_id SERIAL PRIMARY KEY,
+    name TEXT NOT NULL,
+    description TEXT,
+    price NUMERIC(10,2),
+    category_id INT REFERENCES ecommerce.categories(category_id),
+    stock INT
+);
+
+CREATE TABLE ecommerce.customers (
+    customer_id SERIAL PRIMARY KEY,
+    name TEXT NOT NULL,
+    email TEXT UNIQUE,
+    phone TEXT,
+    address TEXT
+);
+
+CREATE TABLE ecommerce.orders (
+    order_id SERIAL PRIMARY KEY,
+    customer_id INT REFERENCES ecommerce.customers(customer_id),
+    order_date TIMESTAMP,
+    status TEXT,
+    total NUMERIC(10,2)
+);
+
+CREATE TABLE ecommerce.order_items (
+    order_item_id SERIAL PRIMARY KEY,
+    order_id INT REFERENCES ecommerce.orders(order_id),
+    product_id INT REFERENCES ecommerce.products(product_id),
+    quantity INT,
+    price NUMERIC(10,2)
+);
+
 
 ```
 
 **ผลการทำแบบฝึกหัด 3:**
 ```
 ใส่ Screenshot ของ:
-1. โครงสร้าง schemas และ tables (\dn+, \dt ecommerce.*)
-2. ข้อมูลตัวอย่างในตารางต่างๆ
-3. ผลการรัน queries ที่สร้าง
-4. การวิเคราะห์ข้อมูลที่ได้
+![alt text](image-57.png)
+![alt text](image-58.png)
+![alt text](image-59.png)
+![alt text](image-60.png)
+![alt text](image-61.png)
+![alt text](image-62.png)
+![alt text](image-63.png)
+![alt text](image-54.png)
+![alt text](image-55.png)
+![alt text](image-56.png)
 ```
 
 
@@ -969,9 +1033,14 @@ docker volume create postgres-data
 ตอบคำถามต่อไปนี้:
 
 1. อธิบายความแตกต่างระหว่าง Named Volume และ Bind Mount ในบริบทของ PostgreSQL
+    - Named Volume: Docker จัดการ, เหมาะกับ production
+    - Bind Mount: map ตรงกับ host, เหมาะกับ dev/test
 2. เหตุใด shared_buffers จึงควรตั้งเป็น 25% ของ RAM?
+    - Balance ระหว่าง PostgreSQL cache กับ OS cache = performance ดีสุด
 3. การใช้ Schema ช่วยในการจัดการฐานข้อมูลขนาดใหญ่อย่างไร?
+    - แยก objects เป็นหมวด, ลดความซับซ้อน, จัดการสิทธิ์ง่าย
 4. อธิบายประโยชน์ของการใช้ Docker สำหรับ Database Development
+    - แยก environment, reproducible, จำกัด resource, ย้ายง่าย, จัดการ lifecycle สะดวก
 
 **คำตอบ Quiz 1:**
 ```
