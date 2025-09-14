@@ -258,10 +258,9 @@ WHERE datname = 'lab_db';
 
 **บันทึกผลการทดลอง - Step 6:**
 ```
-ใส่ Screenshot ของ:
-1. ผลการสร้าง lab_db
-2. ผลการรัน \l+ แสดงฐานข้อมูลทั้งหมด
-3. ผลการ query ข้อมูลฐานข้อมูล
+![alt text](image-9.png)
+![alt text](image-11.png)
+![alt text](image-12.png)
 ```
 
 ### Step 7: User และ Role Management
@@ -316,10 +315,11 @@ WHERE r.rolname NOT LIKE 'pg_%';
 
 **บันทึกผลการทดลอง - Step 7:**
 ```
-ใส่ Screenshot ของ:
-1. ผลการสร้าง users ทั้งหมด
-2. ผลการรัน \du+
-3. ผลการ query pg_roles
+![alt text](image-13.png)
+![alt text](image-14.png)
+![alt text](image-15.png)
+![alt text](image-16.png)
+![alt text](image-17.png)
 ```
 
 ### Step 8: การจัดการสิทธิ์ User
@@ -379,14 +379,23 @@ GRANT SELECT ON postgres_test_table TO lab_user;
 **บันทึกผลการทดลอง - Step 8:**
 ```
 ใส่ Screenshot ของ:
-1. ผลการ ALTER USER commands
-2. ผลการรัน \dp test_permissions
-3. ผลการ GRANT commands
+![alt text](image-18.png)
+![alt text](image-19.png)
+![alt text](image-20.png)
+![alt text](image-21.png)
+![alt text](image-22.png)
+![alt text](image-23.png)
 ```
 **คำถาม
  ```
-Access Privileges   postgres=arwdDxtm/postgres มีความหมายอย่างไร
+ 
+postgres (ซ้าย) = role ที่ได้รับสิทธิ์
 
+arwdDxtm = สิทธิ์ (Insert, Select, Update, Delete, Truncate, References, Trigger, Vacuum)
+
+postgres (ขวา) = คนที่ให้สิทธิ์
+
+👉 แปลว่า user postgres มีสิทธิ์ครบทุกอย่างบนตารางนี้ และได้สิทธิ์จาก postgres superuser
 
  ```
 ### Step 9: Schema Management และ Namespace
