@@ -79,9 +79,9 @@ docker run hello-world
 ```
 
 **บันทึกผลการทดลอง - การเตรียมความพร้อม:**
-```
+
 ![alt text](image.png)
-```
+
 
 ## ขั้นตอนการทดลอง
 
@@ -103,9 +103,9 @@ docker inspect postgres
 
 
 **บันทึกผลการทดลอง - Step 1:**
-```
+
 ![alt text](image-1.png)
-```
+
 
 ### Step 2: Create Docker Volume for Data Persistence
 
@@ -126,9 +126,9 @@ docker volume create postgres-config
 **คำอธิบาย**: Docker Volume จะทำให้ข้อมูลคงอยู่แม้ Container จะถูกลบ
 
 **บันทึกผลการทดลอง - Step 2:**
-```
+
 ![alt text](image-2.png)
-```
+
 
 ### Step 3: Create PostgreSQL Container with Volume
 
@@ -149,9 +149,9 @@ docker volume create postgres-config
 - `-c shared_buffers=256MB`: กำหนด shared buffers
 
 **บันทึกผลการทดลอง - Step 3:**
-```
+
 ![alt text](image-3.png)
-```
+
 
 ### Step 4: Verify Container Status and Resource Usage
 
@@ -170,11 +170,11 @@ docker volume inspect postgres-data
 ```
 
 **บันทึกผลการทดลอง - Step 4:**
-```
+
 ![alt text](image-4.png)
 ![alt text](image-5.png)
 ![alt text](image-6.png)
-```
+
 
 ### Step 5: Connect to PostgreSQL และตรวจสอบ Configuration
 
@@ -214,11 +214,11 @@ WHERE name IN ('shared_buffers', 'work_mem', 'maintenance_work_mem', 'effective_
 ```
 
 **บันทึกผลการทดลอง - Step 5:**
-```
+
 ![alt text](image-7.png)
 ![alt text](image-8.png)
 ![alt text](image-10.png)
-```
+
 
 ### Step 6: Database Management Operations
 
@@ -257,11 +257,11 @@ WHERE datname = 'lab_db';
 ```
 
 **บันทึกผลการทดลอง - Step 6:**
-```
+
 ![alt text](image-9.png)
 ![alt text](image-11.png)
 ![alt text](image-12.png)
-```
+
 
 ### Step 7: User และ Role Management
 
@@ -314,13 +314,13 @@ WHERE r.rolname NOT LIKE 'pg_%';
 ```
 
 **บันทึกผลการทดลอง - Step 7:**
-```
+
 ![alt text](image-13.png)
 ![alt text](image-14.png)
 ![alt text](image-15.png)
 ![alt text](image-16.png)
 ![alt text](image-17.png)
-```
+
 
 ### Step 8: การจัดการสิทธิ์ User
 
@@ -377,14 +377,14 @@ GRANT SELECT ON postgres_test_table TO lab_user;
 ```
 
 **บันทึกผลการทดลอง - Step 8:**
-```
+
 ![alt text](image-18.png)
 ![alt text](image-19.png)
 ![alt text](image-20.png)
 ![alt text](image-21.png)
 ![alt text](image-22.png)
 ![alt text](image-23.png)
-```
+
 **คำถาม
  ```
 
@@ -496,14 +496,14 @@ INSERT INTO hr.employee_orders (employee_id, customer_id, order_date, commission
 ```
 
 **บันทึกผลการทดลอง - Step 9:**
-```
+
 ![alt text](image-24.png)
 ![alt text](image-25.png)
 ![alt text](image-26.png)
 ![alt text](image-27.png)
 ![alt text](image-28.png)
 ![alt text](image-29.png)
-```
+
 
 ### Step 10: ทดสอบการเข้าถึง Schema และ Search Path
 
@@ -564,12 +564,12 @@ SET search_path TO public;
 ```
 
 **บันทึกผลการทดลอง - Step 10:**
-```
+
 ![alt text](image-30.png)
 ![alt text](image-31.png)
 ![alt text](image-32.png)
 ![alt text](image-33.png)
-```
+
 
 ### Step 11: ทดสอบการเชื่อมต่อจาก User อื่น
 
@@ -595,11 +595,11 @@ INSERT INTO test_permissions (name) VALUES ('Test by lab_user'); -- ทำไม
 ```
 
 **บันทึกผลการทดลอง - Step 11:**
-```
+
 ![alt text](image-34.png)
 ![alt text](image-35.png)
 ![alt text](image-36.png)
-```
+
 
 ### Step 12: การจัดการ Volume และ Data Persistence
 
@@ -629,12 +629,12 @@ docker run --name postgres-backup-test \
 ```
 
 **บันทึกผลการทดลอง - Step 12:**
-```
+
 ![alt text](image-37.png)
 ![alt text](image-38.png)
 ![alt text](image-39.png)
 ![alt text](image-40.png)
-```
+
 
 ## การตรวจสอบผลงานและ Performance
 
@@ -702,11 +702,11 @@ WHERE state = 'active';
 ```
 
 **บันทึกผล Checkpoint 2:**
-```
+
 ![alt text](image-42.png)
 ![alt text](image-43.png)
 ![alt text](image-44.png)
-```
+
 
 ## การแก้ไขปัญหาเบื้องต้น
 
@@ -767,11 +767,11 @@ docker run --name multi-postgres -e POSTGRES_PASSWORD=multipass123 -v multi-post
 ```
 
 **ผลการทำแบบฝึกหัด 1:**
-```
+
 ![alt text](image-45.png)
 ![alt text](image-46.png)
 ![alt text](image-47.png)
-```
+
 
 ### แบบฝึกหัด 2: User Management และ Security
 **คำสั่ง**: สร้างระบบผู้ใช้ที่สมบูรณ์:
@@ -806,15 +806,14 @@ GRANT db_admins TO admin_user;
 ```
 
 **ผลการทำแบบฝึกหัด 2:**
-```
-ใส่ Screenshot ของ:
+
 ![alt text](image-48.png)
 ![alt text](image-49.png)
 ![alt text](image-50.png)
 ![alt text](image-51.png)
 ![alt text](image-52.png)
 ![alt text](image-53.png)
-```
+
 
 ### แบบฝึกหัด 3: Schema Design และ Complex Queries
 **คำสั่ง**: สร้างระบบฐานข้อมูลร้านค้าออนไลน์:
@@ -958,12 +957,11 @@ GRANT db_admins TO admin_user;
     -- Order 15: Lisa Anderson
     (15, 8, 1, 129.99); -- Sneakers
 ```
-```
-   สร้าง queries เพื่อหาคำตอบ:
+
    ![alt text](image-54.png)
    ![alt text](image-55.png)
    ![alt text](image-56.png)
-```
+
 ```sql
 CREATE SCHEMA ecommerce;
 CREATE SCHEMA analytics;
@@ -1010,10 +1008,8 @@ CREATE TABLE ecommerce.order_items (
 
 
 ```
-
 **ผลการทำแบบฝึกหัด 3:**
-```
-ใส่ Screenshot ของ:
+
 ![alt text](image-57.png)
 ![alt text](image-58.png)
 ![alt text](image-59.png)
@@ -1024,8 +1020,6 @@ CREATE TABLE ecommerce.order_items (
 ![alt text](image-54.png)
 ![alt text](image-55.png)
 ![alt text](image-56.png)
-```
-
 
 ## การทดสอบความเข้าใจ
 
@@ -1033,20 +1027,25 @@ CREATE TABLE ecommerce.order_items (
 ตอบคำถามต่อไปนี้:
 
 1. อธิบายความแตกต่างระหว่าง Named Volume และ Bind Mount ในบริบทของ PostgreSQL
-    - Named Volume: Docker จัดการ, เหมาะกับ production
-    - Bind Mount: map ตรงกับ host, เหมาะกับ dev/test
 2. เหตุใด shared_buffers จึงควรตั้งเป็น 25% ของ RAM?
-    - Balance ระหว่าง PostgreSQL cache กับ OS cache = performance ดีสุด
 3. การใช้ Schema ช่วยในการจัดการฐานข้อมูลขนาดใหญ่อย่างไร?
-    - แยก objects เป็นหมวด, ลดความซับซ้อน, จัดการสิทธิ์ง่าย
 4. อธิบายประโยชน์ของการใช้ Docker สำหรับ Database Development
-    - แยก environment, reproducible, จำกัด resource, ย้ายง่าย, จัดการ lifecycle สะดวก
 
 **คำตอบ Quiz 1:**
 ```
-เขียนคำตอบที่นี่
-```
+1. อธิบายความแตกต่างระหว่าง Named Volume และ Bind Mount ในบริบทของ PostgreSQL
+    - Named Volume: Docker จัดการ, เหมาะกับ production
+    - Bind Mount: map ตรงกับ host, เหมาะกับ dev/test
 
+2. เหตุใด shared_buffers จึงควรตั้งเป็น 25% ของ RAM?
+    - Balance ระหว่าง PostgreSQL cache กับ OS cache → performance ดีสุด
+
+3. การใช้ Schema ช่วยในการจัดการฐานข้อมูลขนาดใหญ่อย่างไร?
+    - แยก objects เป็นหมวด, ลดความซับซ้อน, จัดการสิทธิ์ง่าย
+
+4. อธิบายประโยชน์ของการใช้ Docker สำหรับ Database Development
+    - แยก environment, reproducible, จำกัด resource, ย้ายง่าย, จัดการ lifecycle สะดวก
+```
 
 ## สรุปและการประเมินผล
 
