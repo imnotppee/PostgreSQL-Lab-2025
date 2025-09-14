@@ -378,7 +378,6 @@ GRANT SELECT ON postgres_test_table TO lab_user;
 
 **บันทึกผลการทดลอง - Step 8:**
 ```
-ใส่ Screenshot ของ:
 ![alt text](image-18.png)
 ![alt text](image-19.png)
 ![alt text](image-20.png)
@@ -388,14 +387,14 @@ GRANT SELECT ON postgres_test_table TO lab_user;
 ```
 **คำถาม
  ```
- 
+
 postgres (ซ้าย) = role ที่ได้รับสิทธิ์
 
 arwdDxtm = สิทธิ์ (Insert, Select, Update, Delete, Truncate, References, Trigger, Vacuum)
 
 postgres (ขวา) = คนที่ให้สิทธิ์
 
-👉 แปลว่า user postgres มีสิทธิ์ครบทุกอย่างบนตารางนี้ และได้สิทธิ์จาก postgres superuser
+แปลว่า user postgres มีสิทธิ์ครบทุกอย่างบนตารางนี้ และได้สิทธิ์จาก postgres superuser
 
  ```
 ### Step 9: Schema Management และ Namespace
@@ -498,11 +497,12 @@ INSERT INTO hr.employee_orders (employee_id, customer_id, order_date, commission
 
 **บันทึกผลการทดลอง - Step 9:**
 ```
-ใส่ Screenshot ของ:
-1. ผลการสร้าง schemas (\dn+)
-2. ผลการสร้างตารางในแต่ละ schema
-3. ผลการใส่ข้อมูลและ query ข้อมูล
-4. ข้อมูลในตาราง employee_orders ที่จะใช้สำหรับ JOIN ข้าม schema
+![alt text](image-24.png)
+![alt text](image-25.png)
+![alt text](image-26.png)
+![alt text](image-27.png)
+![alt text](image-28.png)
+![alt text](image-29.png)
 ```
 
 ### Step 10: ทดสอบการเข้าถึง Schema และ Search Path
@@ -565,11 +565,10 @@ SET search_path TO public;
 
 **บันทึกผลการทดลอง - Step 10:**
 ```
-ใส่ Screenshot ของ:
-1. ผลการแสดง search_path
-2. ผลการ query ภายใน schema เดียวกัน (sales.customers + sales.orders)
-3. ผลการ JOIN ข้าม schemas (sales + hr + inventory)
-4. ข้อมูลที่แสดงจาก complex join ข้าม 3 schemas
+![alt text](image-30.png)
+![alt text](image-31.png)
+![alt text](image-32.png)
+![alt text](image-33.png)
 ```
 
 ### Step 11: ทดสอบการเชื่อมต่อจาก User อื่น
@@ -597,10 +596,9 @@ INSERT INTO test_permissions (name) VALUES ('Test by lab_user'); -- ทำไม
 
 **บันทึกผลการทดลอง - Step 11:**
 ```
-ใส่ Screenshot ของ:
-1. ผลการเชื่อมต่อด้วย lab_user
-2. ผลการทดสอบสิทธิ์ต่างๆ
-3. ข้อความ error (ถ้ามี) เมื่อไม่มีสิทธิ์
+![alt text](image-34.png)
+![alt text](image-35.png)
+![alt text](image-36.png)
 ```
 
 ### Step 12: การจัดการ Volume และ Data Persistence
@@ -632,10 +630,10 @@ docker run --name postgres-backup-test \
 
 **บันทึกผลการทดลอง - Step 12:**
 ```
-ใส่ Screenshot ของ:
-1. ผลการหยุดและเริ่ม Container
-2. ยืนยันว่าข้อมูลยังอยู่หลังจาก restart
-3. ผลการสร้าง container พร้อม bind mount
+![alt text](image-37.png)
+![alt text](image-38.png)
+![alt text](image-39.png)
+![alt text](image-40.png)
 ```
 
 ## การตรวจสอบผลงานและ Performance
